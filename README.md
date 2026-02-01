@@ -1,66 +1,204 @@
-<div align="center">
+# 🎮 GameHub – Multi-Game Platform
 
-  <h1>🎮 GameHub – Multi-Game Platform</h1>
+GameHub is a simple, open-source MERN stack project that hosts multiple browser-based games in one place.
 
-  <p>
-    <strong>A fun, open-source MERN stack platform where you can play multiple games in one place — and easily add your own!</strong><br>
-    Perfect for learning full-stack development, contributing to open source, and having fun with friends.
-  </p>
-
-  <!-- Badges -->
-  <p>
-    <img src="https://img.shields.io/badge/MERN%20Stack-%2300D8FF?style=for-the-badge&logo=react&logoColor=white" alt="MERN" />
-    <img src="https://img.shields.io/badge/Open%20Source-Yes-success?style=for-the-badge" alt="Open Source" />
-    <img src="https://img.shields.io/github/stars/YOUR_USERNAME/gamehub?style=for-the-badge&color=yellow" alt="Stars" />
-    <img src="https://img.shields.io/github/forks/YOUR_USERNAME/gamehub?style=for-the-badge&color=teal" alt="Forks" />
-    <img src="https://img.shields.io/github/license/YOUR_USERNAME/gamehub?style=for-the-badge&color=blueviolet" alt="License" />
-  </p>
-
-  <p>
-    <a href="#quick-start">Quick Start</a> •
-    <a href="#games">Current Games</a> •
-    <a href="#contributing">Contributing</a> •
-    <a href="#tech-stack">Tech Stack</a> •
-    <a href="#license">License</a>
-  </p>
-
-  <img src="https://via.placeholder.com/800x400/2c3e50/ecf0f1?text=GameHub+Screenshot" alt="GameHub Preview" width="800" />
-
-</div>
+The project is intentionally kept minimal and modular, making it ideal for students and beginners who want to understand full-stack development and easily add new games.
 
 ---
 
-## ✨ Why GameHub?
+## 🕹️ Included Games
 
-GameHub is a simple yet powerful platform built with the **MERN stack** (MongoDB, Express, React, Node.js) that lets users:
+- Tic-Tac-Toe – Single player vs basic AI
+- Rock-Paper-Scissors – Single player vs random AI
 
-- Play classic games (and more coming!)
-- Register & login to save high scores
-- See leaderboards (coming soon!)
-- **Easily add new games** — even if you're just learning React!
+---
 
-It's designed to be **beginner-friendly** for contributors — perfect for students, bootcamp grads, or anyone wanting to practice full-stack development and open source.
+## ✨ Features
 
-## 🎲 Current Games
+- User registration & login (JWT authentication)
+- Score saving (win = 1, loss/draw = 0)
+- Simple plain CSS styling
+- Easy structure for adding new games
+- Separate backend and frontend folders
+- Ready for local development & free-tier deployment
 
-| Game                  | Type              | Single-player | Score Saving | Difficulty |
-|-----------------------|-------------------|---------------|--------------|------------|
-| Tic-Tac-Toe           | Board             | Yes (vs AI)   | Yes          | Easy       |
-| Rock-Paper-Scissors   | Quick choice      | Yes (vs AI)   | Yes          | Very Easy  |
-| Your Game Here!       | Any               | —             | Optional     | —          |
+---
 
-> Want to add Snake, Memory Match, Hangman, Pong, or something totally new? Jump to the **Contributing** section!
+## 🛠️ Tech Stack
 
-## 🚀 Quick Start (Local Development)
+Part | Technology  
+---- | ----------
+Frontend | React 18, React Router  
+Backend | Node.js, Express  
+Database | MongoDB + Mongoose  
+Auth | JWT + bcrypt  
+Styling | Plain CSS  
 
-### Prerequisites
+---
 
-- Node.js ≥ 16
-- npm or yarn
-- MongoDB (local or free MongoDB Atlas account)
+## 🚀 Installation & Setup
 
-### 1. Clone the repo
+### 1️⃣ Clone the Repository
 
-```bash
-git clone https://github.com/YOUR_USERNAME/gamehub.git
-cd gamehub
+    git clone https://github.com/YOUR-USERNAME/gamehub.git
+    cd gamehub
+
+---
+
+### 2️⃣ Install Dependencies
+
+Backend:
+
+    cd backend
+    npm install
+
+Frontend:
+
+    cd ../frontend
+    npm install
+
+---
+
+### 3️⃣ Create Environment Variables
+
+backend/.env
+
+    MONGO_URI=mongodb://127.0.0.1:27017/gamehub
+
+    # MongoDB Atlas example:
+    # MONGO_URI=mongodb+srv://<username>:<password>@cluster0.xxxxx.mongodb.net/gamehub?retryWrites=true&w=majority
+
+    JWT_SECRET=super-secret-key-please-change-this-1234567890abcdef
+    PORT=5000
+
+frontend/.env (optional)
+
+    REACT_APP_API_URL=http://localhost:5000
+
+---
+
+### 4️⃣ Start MongoDB
+
+Local MongoDB:
+
+    mongod
+
+MongoDB Atlas (recommended):
+
+- Create a free cluster at https://www.mongodb.com/cloud/atlas
+- Copy the connection string
+- Paste it into MONGO_URI in backend/.env
+
+---
+
+### 5️⃣ Run the Application
+
+Terminal 1 – Backend:
+
+    cd backend
+    npm start
+
+Expected output:
+
+    MongoDB connected
+    Server running on port 5000
+
+Terminal 2 – Frontend:
+
+    cd frontend
+    npm start
+
+Open in browser:
+
+    http://localhost:3000
+
+---
+
+## ✅ Quick Test Flow
+
+1. Register a new account (example: player1 / 123456)
+2. Login
+3. Open Tic-Tac-Toe or Rock-Paper-Scissors
+4. Play games and verify scores are recorded
+
+---
+
+## ➕ How to Add a New Game
+
+### 1. Create Game Component
+
+    frontend/src/components/Games/YourGameName.js
+
+### 2. Example Component
+
+    import React, { useState } from 'react';
+
+    const YourGameName = () => {
+      const [score, setScore] = useState(0);
+
+      const handleWin = () => {
+        setScore(prev => prev + 1);
+      };
+
+      return (
+        <div>
+          <h2>Your Game Name</h2>
+          <p>Score: {score}</p>
+          <button onClick={handleWin}>I Win!</button>
+        </div>
+      );
+    };
+
+    export default YourGameName;
+
+---
+
+### 3. Add Game Link
+
+    <li>
+      <Link to="/games/your-game-name">Your Game Name</Link>
+    </li>
+
+---
+
+### 4. Add Route
+
+    <Route path="/games/your-game-name" element={<YourGameName />} />
+
+Your game is now part of GameHub 🎉
+
+---
+
+## 🧯 Common Issues & Fixes
+
+Problem | Cause | Fix  
+------- | ----- | ---
+MongoDB error | Mongo not running | Start mongod or check URI  
+CORS error | Wrong API URL | Check REACT_APP_API_URL  
+Module not found | npm install skipped | Run npm install  
+No CSS | CSS not imported | Import index.css  
+API 404 | Backend not running | Start backend on port 5000  
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.
+
+Ideas:
+- Add new games (Snake, Memory, 2048)
+- Improve UI or add dark mode
+- Add leaderboard
+- Improve mobile responsiveness
+- Fix documentation or typos
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+Happy coding & gaming 🎮  
+— Suvayu & contributors
