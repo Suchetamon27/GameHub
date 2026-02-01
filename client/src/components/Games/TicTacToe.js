@@ -57,7 +57,7 @@ const TicTacToe = () => {
 
     useEffect(() => {
         if (!isPlayerTurn && !winner) aiMove();
-    }, [isPlayerTurn, winner]);
+    }, [isPlayerTurn, winner, aiMove]);
 
     return (
         <div>
