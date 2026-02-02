@@ -5,6 +5,7 @@ const RockPaperScissors = () => {
     const [playerChoice, setPlayerChoice] = useState(null);
     const [aiChoice, setAiChoice] = useState(null);
     const [result, setResult] = useState(null);
+    const API_BASE = process.env.REACT_APP_API_BASE || 'http://localhost:5000';
 
     const choices = ['Rock', 'Paper', 'Scissors'];
 
@@ -37,7 +38,7 @@ const RockPaperScissors = () => {
         const token = localStorage.getItem('token');
         if (!token) return;
         try {
-            await axios.post('/api/scores', { game: 'RockPaperScissors', score }, {
+            await axios.post(`${API_BASE}/api/scores`, { game: 'RockPaperScissors', score }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
         } catch (err) {

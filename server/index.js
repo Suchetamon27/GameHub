@@ -6,7 +6,11 @@ const authRoutes = require('./routes/auth');
 const scoreRoutes = require('./routes/scores');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    credentials: true,
+}));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
