@@ -86,6 +86,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* TYPOGRAPHY SCALE */
+.text-sm { font-size: 0.9rem; }
+.text-md { font-size: 1rem; }
+.text-lg { font-size: 1.2rem; }
+.text-xl { font-size: 1.6rem; }
+.text-xxl { font-size: 2rem; }
+
+.font-bold { font-weight: bold; }
+.font-light { font-weight: 300; }
+
 /* Game list */
 ul {
   list-style: none;
